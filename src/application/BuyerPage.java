@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class BuyerPage extends Application {
     private final List<Book> bookList = new ArrayList<>();
-    private static final String FILE_PATH = "textfiles/books.txt";
+    private static final String FILE_PATH = "txtfiles/books.txt";
 
     private VBox bookDisplayArea;
 
@@ -79,7 +79,7 @@ public class BuyerPage extends Application {
         viewCart.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         viewCart.setFont(Font.font("Arial", 14));
         viewCart.setOnAction(event -> {
-            CheckoutPage checkoutPage = new CheckoutPage(bookList); // Pass the book list
+            Checkout checkoutPage = new Checkout(bookList); // Pass the book list
             checkoutPage.start(primaryStage);
         });
 
@@ -87,7 +87,7 @@ public class BuyerPage extends Application {
         logoutButton.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         logoutButton.setFont(Font.font("Arial", 14));
         logoutButton.setOnAction(event -> {
-            LoginPage loginPage = new LoginPage();
+            LoginPageFX loginPage = new LoginPageFX();
             loginPage.start(primaryStage); // Redirect to login page
         });
 
@@ -164,7 +164,7 @@ public class BuyerPage extends Application {
         bookEntry.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;");
 
         // Book image
-        ImageView bookImageView = new ImageView(new Image("file:txtfiles/bookimages/" + book.getImageName()));
+        ImageView bookImageView = new ImageView(new Image("file:bookimages/" + book.getImageName()));
         bookImageView.setFitHeight(100);
         bookImageView.setFitWidth(80);
 
@@ -198,7 +198,7 @@ public class BuyerPage extends Application {
 
     private void addToCart(Book book) {
         // Check if the book is already in the shopping cart
-        try (BufferedReader reader = new BufferedReader(new FileReader("textfiles/shoppingcart.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/shoppingcart.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CheckoutPage extends Application {
+public class Checkout extends Application {
     private List<Book> cartBooks;          // Central cart book list
     private List<Book> buyerBookList;     // Reference to the buyer's book list
     private Label billDetails;            // Bill details label
@@ -34,7 +34,7 @@ public class CheckoutPage extends Application {
     private static final String FILE_PATH = "txtfiles/books.txt";
 
     // Constructor to pass the buyer's book list
-    public CheckoutPage(List<Book> buyerBookList) {
+    public Checkout(List<Book> buyerBookList) {
         this.buyerBookList = buyerBookList;
         this.cartBooks = loadBooksFromCartFile(); // Load cart from file
     }
@@ -313,7 +313,7 @@ public class CheckoutPage extends Application {
     }
 
     private void saveCartBooksToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("txtfiles/shoppingcart.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("shoppingcart.txt"))) {
             for (Book book : cartBooks) {
                 writer.write(book.toFileFormat());
                 writer.newLine();
