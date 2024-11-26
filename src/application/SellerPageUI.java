@@ -22,10 +22,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SellerPage extends Application {
+public class SellerPageUI extends Application {
 
     private final List<Book> bookList = new ArrayList<>();
-    private static final String FILE_PATH = "txtfiles/books_new.txt";
+    private static final String FILE_PATH = "books_new.txt";
     private static final String IMAGE_FOLDER = "bookimages";
     private VBox bookDisplayArea;
 
@@ -90,7 +90,7 @@ public class SellerPage extends Application {
         logoutButton.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         logoutButton.setFont(Font.font("Arial", 14));
         logoutButton.setOnAction(e -> {
-            LoginPage loginPage = new LoginPage();
+            LoginPageFX loginPage = new LoginPageFX();
             loginPage.start(primaryStage);
         });
 

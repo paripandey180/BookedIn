@@ -132,7 +132,7 @@ public class SignUpPage {
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
                 pause.setOnFinished(event -> {
-                    new LoginPage().start(stage);
+                    new LoginPageFX().start(stage);
                 });
                 pause.play();
             }
@@ -143,7 +143,7 @@ public class SignUpPage {
         loginLink.setStyle("-fx-text-fill: #8B0000;");
         loginLink.setPadding(new Insets(3, 0, 0, 0)); 
         loginLink.setOnAction(e -> {
-            LoginPage loginPage = new LoginPage();
+            LoginPageFX loginPage = new LoginPageFX();
             loginPage.start(stage); 
         });
 
