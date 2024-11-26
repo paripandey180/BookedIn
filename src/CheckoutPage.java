@@ -1,4 +1,3 @@
-package application;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,15 +25,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Checkout extends Application {
+public class CheckoutPage extends Application {
     private List<Book> cartBooks;          // Central cart book list
     private List<Book> buyerBookList;     // Reference to the buyer's book list
     private Label billDetails;            // Bill details label
     private VBox bookListContainer;       // Container for books in the cart
-    private static final String FILE_PATH = "txtfiles/books.txt";
+    private static final String FILE_PATH = "books.txt";
 
     // Constructor to pass the buyer's book list
-    public Checkout(List<Book> buyerBookList) {
+    public CheckoutPage(List<Book> buyerBookList) {
         this.buyerBookList = buyerBookList;
         this.cartBooks = loadBooksFromCartFile(); // Load cart from file
     }
@@ -298,7 +297,7 @@ public class Checkout extends Application {
 
     private List<Book> loadBooksFromCartFile() {
         List<Book> books = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/shoppingcart.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("shoppingcart.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");

@@ -1,7 +1,9 @@
-package application;
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -12,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -22,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SellerPageUI extends Application {
+public class SellerPage extends Application {
 
     private final List<Book> bookList = new ArrayList<>();
     private static final String FILE_PATH = "books_new.txt";
@@ -58,9 +61,9 @@ public class SellerPageUI extends Application {
         mainLayout.setPadding(new Insets(10)); // Add padding for the main layout
 
         Scene scene = new Scene(mainLayout, 900, 600);
+
         primaryStage.setTitle("Seller Page");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        configureStage(primaryStage, scene);
     }
 
     private HBox createHeaderBar(Stage primaryStage) {
@@ -90,7 +93,7 @@ public class SellerPageUI extends Application {
         logoutButton.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         logoutButton.setFont(Font.font("Arial", 14));
         logoutButton.setOnAction(e -> {
-            LoginPageFX loginPage = new LoginPageFX();
+            LoginPage loginPage = new LoginPage();
             loginPage.start(primaryStage);
         });
 
@@ -171,6 +174,7 @@ public class SellerPageUI extends Application {
             confirmationAlert.setContentText("Original Price: $" + String.format("%.2f", originalPrice) +
                     "\nDiscounted Price: $" + String.format("%.2f", discountedPrice) +
                     "\nDo you want to list this book?");
+            
             confirmationAlert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     String imageName = selectedImage[0].getName();
@@ -183,11 +187,18 @@ public class SellerPageUI extends Application {
                         return;
                     }
 
+                    // Create the book object and add it to the list
                     Book book = new Book(name, author, category, condition, String.format("%.2f", discountedPrice), imageName);
                     bookList.add(book);
                     saveBookToFile(book);
-                    refreshPage(primaryStage);
 
+                    // Refresh the book display immediately
+                    bookDisplayArea.getChildren().clear(); // Clear current display
+                    for (Book b : bookList) {
+                        bookDisplayArea.getChildren().add(createBookEntry(b)); // Reload all books
+                    }
+
+                    // Show a confirmation that the book is listed
                     Alert addedConfirmation = new Alert(Alert.AlertType.INFORMATION, "Your book has been listed!");
                     addedConfirmation.show();
                 }
@@ -281,10 +292,21 @@ public class SellerPageUI extends Application {
         }
     }
 
-    private void refreshPage(Stage primaryStage) {
+    public void refreshPage(Stage primaryStage) {
         bookList.clear();
         loadBooksFromFile();
         start(primaryStage);
+    }
+
+    public void configureStage(Stage stage, Scene scene) {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,5 @@
-package application;
+
+
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -132,7 +133,7 @@ public class SignUpPage {
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
                 pause.setOnFinished(event -> {
-                    new LoginPageFX().start(stage);
+                    new LoginPage().start(stage);
                 });
                 pause.play();
             }
@@ -143,7 +144,7 @@ public class SignUpPage {
         loginLink.setStyle("-fx-text-fill: #8B0000;");
         loginLink.setPadding(new Insets(3, 0, 0, 0)); 
         loginLink.setOnAction(e -> {
-            LoginPageFX loginPage = new LoginPageFX();
+            LoginPage loginPage = new LoginPage();
             loginPage.start(stage); 
         });
 
@@ -175,7 +176,7 @@ public class SignUpPage {
 
         String userDetails = String.format("%s,%s,%s,%s,%s", asuId, password, buyerRole, sellerRole, adminRole);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("txtfiles/users.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/users.txt", true))) {
             writer.write(userDetails);
             writer.newLine();
         } catch (IOException e) {
@@ -184,7 +185,7 @@ public class SignUpPage {
     }
 
     private boolean isAsuIdTaken(String asuId) {
-    	try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/users.txt"))) {
+    	try (BufferedReader reader = new BufferedReader(new FileReader("src/users.txt"))) {
     		String line;
     		while ((line = reader.readLine()) != null) {
     			String[] userDetails = line.split(",");

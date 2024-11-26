@@ -1,4 +1,5 @@
-package application;
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class BuyerPage extends Application {
     private final List<Book> bookList = new ArrayList<>();
-    private static final String FILE_PATH = "txtfiles/books.txt";
+    private static final String FILE_PATH = "books.txt";
 
     private VBox bookDisplayArea;
 
@@ -79,7 +80,7 @@ public class BuyerPage extends Application {
         viewCart.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         viewCart.setFont(Font.font("Arial", 14));
         viewCart.setOnAction(event -> {
-            Checkout checkoutPage = new Checkout(bookList); // Pass the book list
+            CheckoutPage checkoutPage = new CheckoutPage(bookList); // Pass the book list
             checkoutPage.start(primaryStage);
         });
 
@@ -87,7 +88,7 @@ public class BuyerPage extends Application {
         logoutButton.setStyle("-fx-background-color: gold; -fx-text-fill: #8B0000;");
         logoutButton.setFont(Font.font("Arial", 14));
         logoutButton.setOnAction(event -> {
-            LoginPageFX loginPage = new LoginPageFX();
+            LoginPage loginPage = new LoginPage();
             loginPage.start(primaryStage); // Redirect to login page
         });
 
@@ -198,7 +199,7 @@ public class BuyerPage extends Application {
 
     private void addToCart(Book book) {
         // Check if the book is already in the shopping cart
-        try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/shoppingcart.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("shoppingcart.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
@@ -216,7 +217,7 @@ public class BuyerPage extends Application {
         }
 
         // Add book to shopping cart if it's not already there
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("txtfiles/shoppingcart.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("shoppingcart.txt", true))) {
             writer.write(book.toFileFormat());
             writer.newLine();
             Alert addedConfirmation = new Alert(Alert.AlertType.INFORMATION, "Book has been added to cart!");
@@ -242,7 +243,7 @@ public class BuyerPage extends Application {
         }
     }
 
-    private void configureStage(Stage stage, Scene scene) {
+    public void configureStage(Stage stage, Scene scene) {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setX(bounds.getMinX());

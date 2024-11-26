@@ -7,5 +7,5 @@ The Threads of Time;Pari Pandey;History;Moderately Used;23.49;Time.png
 Digital Frontier;Aashir J;Science;Used Like New;53.75;Cybersec.png
 Shadows of War;Gio Ortiz Rojas;History;Used Like New;38.87;War.png
 Breaking the Boundaries;Gianni Aragones;Non-Fiction;Moderately Used;21.79;Break.png
-Harry;Potter;Non-Fiction;Used Like New;38.70;9781338878929__12306.jpg
-Harry Potter;JK Rowling;Fiction;Used Like New;50.40;Harry_Potter.jpg
+Calculus;Aashir J;Science;Used Like New;81.00;calc.png
+Calculus;Aashir;Science;Moderately Used;70.00;calc.png

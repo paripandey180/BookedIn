@@ -1,4 +1,5 @@
-package application;
+
+
 public class Book {
     private final String name;
     private final String author;

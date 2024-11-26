@@ -1,4 +1,5 @@
-package application;
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.Scanner;
 
-public class LoginPageFX extends Application {
+public class LoginPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -128,7 +129,7 @@ public class LoginPageFX extends Application {
                     BuyerPage buyerPage = new BuyerPage();
                     buyerPage.start(primaryStage); // Redirect to Buyer Page
                 } else if (selectedRole.equals("Seller")) {
-                    SellerPageUI sellerPage = new SellerPageUI();
+                    SellerPage sellerPage = new SellerPage();
                     sellerPage.start(primaryStage); // Redirect to Seller Page
                 } else if (selectedRole.equals("Admin")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Did not implement Admin functionality.");
@@ -180,7 +181,7 @@ public class LoginPageFX extends Application {
 
     // Validate credentials from users.txt file
     private boolean validateCredentials(String asuId, String password, String role) {
-        try (Scanner scanner = new Scanner(new File("txtfiles/users.txt"))) {
+        try (Scanner scanner = new Scanner(new File("src/users.txt"))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] userDetails = line.split(",");
@@ -205,8 +206,8 @@ public class LoginPageFX extends Application {
 
     // Reset books.txt from books_new.txt
     private void resetBooksFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/books_new.txt"));
-             BufferedWriter writer = new BufferedWriter(new FileWriter("txtfiles/books.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("books_new.txt"));
+             BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
@@ -219,8 +220,8 @@ public class LoginPageFX extends Application {
 
     // Reset shoppingcart.txt from shoppingcart_new.txt
     private void resetCartFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("txtfiles/shoppingcart_new.txt"));
-             BufferedWriter writer = new BufferedWriter(new FileWriter("txtfiles/shoppingcart.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("shoppingcart_new.txt"));
+             BufferedWriter writer = new BufferedWriter(new FileWriter("shoppingcart.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
